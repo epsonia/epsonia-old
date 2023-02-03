@@ -1,0 +1,19 @@
+version: "3"
+
+vars:
+  NAME: epsiona
+ 
+tasks: 
+  build:
+    desc: Compile {{.NAME}}
+    cmds:
+      - deno compile -A --unstable -o ./build/lin/{{.NAME}} --target=x86_64-unknown-linux-gnu ./src/main.ts
+      - deno compile -A --unstable -o ./build/win/{{.NAME}} --target=x86_64-pc-windows-msvc ./src/main.ts
+  clean:
+    desc: Remove excess files
+    cmds:
+      - rm -rf ./build
+  run:
+    desc: Run {{.NAME}}.
+    cmds:
+      - deno run -A ./src/main.ts run {{ .CLI_ARGS }}
