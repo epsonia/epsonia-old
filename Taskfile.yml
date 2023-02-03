@@ -1,7 +1,7 @@
 version: "3"
 
 vars:
-  NAME: epsiona
+  NAME: epsonia
  
 tasks: 
   build:
