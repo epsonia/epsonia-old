@@ -10,13 +10,13 @@ Anyways, lets not get too ahead of ourselves into the future.
 
 ## Todo
 
-- [] Config for creating the checks
-- [] Create a modular check system
-  - [] Check file exist
-  - [] Check firewall up
-  - [] Check directory permissions
-  - [] Check file permissions
-  - [] Check passwords - _**strongness**_
-  - [] Check user permissions
-- [] Create a modular event system
-- [] Create some more todos, because two wont cut
+- [ ] Config for creating the checks
+- [ ] Create a modular check system
+  - [ ] Check file exist
+  - [ ] Check firewall up
+  - [ ] Check directory permissions
+  - [ ] Check file permissions
+  - [ ] Check passwords - _**strongness**_
+  - [ ] Check user permissions
+- [ ] Create a modular event system
+- [ ] Create some more todos, because two wont cut
