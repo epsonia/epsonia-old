@@ -10,6 +10,9 @@ Anyways, lets not get too ahead of ourselves into the future.
 
 ## Todo
 
+- [ ] Create HTML file for README
+  - [ ] Read from config file - Markdown
+- [ ] Create HTML file for checks (progress log)
 - [ ] Config for creating the checks
 - [ ] Create a modular check system
   - [ ] Check file exist
