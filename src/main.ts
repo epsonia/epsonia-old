@@ -1,3 +1,8 @@
-if (import.meta.main) {
-  console.log("Welcome to Epsonia");
+import { marky } from "./deps.ts";
+import * as conf from './config.ts';
+
+await main();
+
+async function main() {
+ 
 }
