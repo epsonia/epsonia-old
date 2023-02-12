@@ -2,3 +2,4 @@ build/
 
 config/brief.md
 config/config.json
+config/checks.json
