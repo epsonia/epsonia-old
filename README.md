@@ -10,8 +10,8 @@ Anyways, lets not get too ahead of ourselves into the future.
 
 ## Todo
 
-- [ ] Create HTML file for README
-  - [ ] Read from config file - Markdown
+- [x] Create HTML file for README
+  - [x] Read from config file - Marky for parsing Markdown
 - [ ] Create HTML file for checks (progress log)
 - [ ] Config for creating the checks
 - [ ] Create a modular check system
@@ -22,4 +22,3 @@ Anyways, lets not get too ahead of ourselves into the future.
   - [ ] Check passwords - _**strongness**_
   - [ ] Check user permissions
 - [ ] Create a modular event system
-- [ ] Create some more todos, because two wont cut

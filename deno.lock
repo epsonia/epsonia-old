@@ -1,0 +1,8 @@
+{
+  "version": "2",
+  "remote": {
+    "https://deno.land/x/marky@v1.1.6/marky.ts": "9c90564d79a7a4d704faef20ac97619cd20b967e48885351b6ef8a22ffdf99eb",
+    "https://deno.land/x/marky@v1.1.6/mod.ts": "fcae8411be5ae4399695689883dc09d0f279d59369f4562a9f2762d47cce39f4",
+    "https://deno.land/x/marky@v1.1.6/parsers.ts": "494d7611f2d316cfe8c2f88abd1558ddb5afb62b7af89f71f39c3154919169a7"
+  }
+}
