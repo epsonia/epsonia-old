@@ -14,11 +14,10 @@ Anyways, lets not get too ahead of ourselves into the future.
   - [x] Read from config file - Marky for parsing Markdown
 - [ ] Create HTML file for checks (progress log)
 - [ ] Config for creating the checks
-- [ ] Create a modular check system
-  - [ ] Check file exist
+- [x] Create a modular check system
+  - [x] Check file exist
   - [ ] Check firewall up
   - [ ] Check directory permissions
   - [ ] Check file permissions
   - [ ] Check passwords - _**strongness**_
   - [ ] Check user permissions
-- [ ] Create a modular event system

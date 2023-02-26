@@ -5,6 +5,7 @@ export interface Config {
   auto_export: boolean; // If auto export is allowed or not, explination is above
   config_folder: string; // Path to config, aka parent for this file
   export_folder: string; // Path to export, ../export/
+  engine_interval: number; // Repetition for engine scoring (dely for each run)
 }
 
 const settings: Config = JSON.parse(
@@ -17,4 +18,5 @@ export const {
   auto_export,
   export_folder,
   config_folder,
+  engine_interval,
 } = settings;

@@ -1,5 +1,7 @@
 import { marky } from "./deps.ts";
 import * as conf from "./config.ts";
+import { getChecks } from "./checksConfig.ts";
+import { Engine } from "./engine.ts";
 
 main();
 
@@ -11,7 +13,18 @@ function main(): void {
 
   const briefHtml = marky(briefMd);
   Deno.writeTextFileSync(
-    conf.export_folder + "/brief.html",
+    conf.auto_export
+      ? conf.auto_export_path + "/brief.html"
+      : conf.export_folder + "/brief.html",
     briefHtml,
   );
+
+  const engine: Engine = new Engine(getChecks());
+  setInterval(() => {
+    loop(engine);
+  }, conf.engine_interval);
+}
+
+function loop(engine: Engine): void {
+  engine.runEngine();
 }
