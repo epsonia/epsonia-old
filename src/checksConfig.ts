@@ -21,7 +21,7 @@ function parseChecksConfig(): ChecksConfig {
 }
 
 export function getChecks(): Check[] {
-  let checks: Check[] = [];
+  const checks: Check[] = [];
 
   // Take in config and turn it into check objects, put objects in return array\
   if (parseChecksConfig().fileExistsChecks) {
