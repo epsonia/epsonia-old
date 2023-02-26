@@ -4,9 +4,9 @@ import { getChecks, getMaxPoints } from "./checksConfig.ts";
 import { Engine } from "./engine.ts";
 import { Check } from "./checks/check.ts";
 
-main();
+await main();
 
-function main(): void {
+async function main(): Promise<void> {
   // Take in breif and spit out an html file using Marky
   const briefMd: string = new TextDecoder("utf-8").decode(
     Deno.readFileSync(conf.config_folder + "/brief.md"),
@@ -22,11 +22,11 @@ function main(): void {
 
   const checks: Check[] = getChecks();
   const engine: Engine = new Engine(checks, getMaxPoints(checks));
-  setInterval(() => {
-    loop(engine);
+  setInterval(async () => {
+    await loop(engine);
   }, conf.engine_interval);
 }
 
-function loop(engine: Engine): void {
-  engine.runEngine();
+async function loop(engine: Engine): Promise<void> {
+  await engine.runEngine();
 }

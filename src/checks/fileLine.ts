@@ -11,10 +11,11 @@ export class FileLineContainsCheck extends Check {
     line: number,
     correctContent: string,
     points: number,
+    message: string,
   ) {
     super(
       CheckType.FileLineContains,
-      `Config removed - points`,
+      message,
       points,
     );
 
@@ -23,9 +24,9 @@ export class FileLineContainsCheck extends Check {
     this.correctContent = correctContent;
   }
 
-  public runCheck(): void {
+  public async runCheck(): Promise<void> {
     if (
-      getLineFromFile(this.filePath, this.line) === this.correctContent
+      await getLineFromFile(this.filePath, this.line) === this.correctContent
     ) {
       this.completed = true;
       return;

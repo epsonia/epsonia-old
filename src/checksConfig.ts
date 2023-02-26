@@ -45,7 +45,7 @@ export function getChecks(): Check[] {
   // Take in config and turn it into check objects, put objects in return array\
   if (parsedConfig.fileExistsChecks) {
     for (const check of parsedConfig.fileExistsChecks) {
-      checks.push(new FileExistsCheck(check.path, check.points));
+      checks.push(new FileExistsCheck(check.path, check.points, check.message));
     }
   }
 
@@ -57,6 +57,7 @@ export function getChecks(): Check[] {
           check.line,
           check.correctContent,
           check.points,
+          check.message,
         ),
       );
     }

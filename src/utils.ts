@@ -1,3 +1,5 @@
+import { readLines } from "./deps.ts";
+
 export function exists(filename: string): boolean {
   try {
     Deno.statSync(filename);
@@ -14,30 +16,17 @@ export function exists(filename: string): boolean {
   }
 }
 
-export function getLineFromFile(
+export async function getLineFromFile(
   filePath: string,
   lineNumber: number,
-): string {
+): Promise<string> {
   let currentLine = "";
+  let currentLineNum = 1;
 
-  try {
-    const file = Deno.openSync(filePath);
+  const file = await Deno.open(filePath);
 
-    try {
-      let currentLineNumber = 1;
-
-      for (const line of Deno.iterSync(file)) {
-        if (currentLineNumber === lineNumber) {
-          currentLine = new TextDecoder("utf-8").decode(line).trim();
-          break;
-        }
-        currentLineNumber++;
-      }
-    } finally {
-      file.close();
-    }
-  } catch (err) {
-    console.error(`Error reading file: ${err}`);
+  for await (const line of readLines(file)) {
+    currentLineNum == lineNumber ? currentLine = line : currentLineNum++;
   }
 
   return currentLine;

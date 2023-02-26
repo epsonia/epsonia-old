@@ -3,10 +3,10 @@ import { exists } from "../utils.ts";
 
 export class FileExistsCheck extends Check {
   filePath: string;
-  constructor(filePath: string, points: number) {
+  constructor(filePath: string, points: number, message: string) {
     super(
       CheckType.FileExists,
-      `Removed malicous file: ${filePath} - ${points}`,
+      message,
       points,
     );
 

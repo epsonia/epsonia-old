@@ -18,11 +18,11 @@ export class Engine {
   }
 
   // Run checks, then update the scoring report
-  public runEngine() {
+  public async runEngine() {
     console.log(colors.bold.cyan("Running checks..."));
 
     for (const check of this.checks) {
-      check.runCheck();
+      await check.runCheck();
       if (check.completed) {
         if (!this.completedChecks.includes(check)) this.score += check.points;
         this.completedChecks.push(check);
@@ -44,7 +44,8 @@ export class Engine {
   private setScoringReport() {
     let completedChecksStr = "";
     for (const completedCheck of this.completedChecks) {
-      completedChecksStr += `•${completedCheck.completedMessage}\n\n`;
+      completedChecksStr +=
+        `•${completedCheck.completedMessage} - ${completedCheck.points}\n\n`;
     }
 
     const mdScoringReport =
