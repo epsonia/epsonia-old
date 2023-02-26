@@ -13,3 +13,32 @@ export function exists(filename: string): boolean {
     }
   }
 }
+
+async function getLineFromFile(
+  filePath: string,
+  lineNumber: number,
+): Promise<string | undefined> {
+  let currentLine: string | undefined;
+
+  try {
+    const file = await Deno.open(filePath);
+
+    try {
+      let currentLineNumber = 1;
+
+      for await (const line of Deno.iter(file)) {
+        if (currentLineNumber === lineNumber) {
+          currentLine = new TextDecoder().decode(line).trim();
+          break;
+        }
+        currentLineNumber++;
+      }
+    } finally {
+      file.close();
+    }
+  } catch (err) {
+    console.error(`Error reading file: ${err}`);
+  }
+
+  return currentLine;
+}
