@@ -4,9 +4,9 @@ import { getChecks, getMaxPoints } from "./checksConfig.ts";
 import { Engine } from "./engine.ts";
 import { Check } from "./checks/check.ts";
 
-await main();
+main();
 
-async function main(): Promise<void> {
+function main(): void {
   // Take in breif and spit out an html file using Marky
   const briefMd: string = new TextDecoder("utf-8").decode(
     Deno.readFileSync(conf.config_folder + "/brief.md"),
