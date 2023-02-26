@@ -49,7 +49,7 @@ export class Engine {
 
     const mdScoringReport =
       `# ${this.imageName}\n\n\n### Gained a total of ${this.score} out of ${this.maxScore} points` +
-      `${" "}recieved\n\n### ${this.completedChecks.length} out of ${this.checksAmount} insecurities ` +
+      `${" "}recieved\n\n### ${this.completedChecks.length} out of ${this.checksAmount} vulnerabilities ` +
       `solved for a total of ${this.score} points:\n\n${completedChecksStr}`;
 
     const autoRefreshScript = `
