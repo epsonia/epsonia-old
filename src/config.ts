@@ -6,6 +6,7 @@ export interface Config {
   config_folder: string; // Path to config, aka parent for this file
   export_folder: string; // Path to export, ../export/
   engine_interval: number; // Repetition for engine scoring (dely for each run)
+  auto_refresh: number; // Auto refresh time for the scoring report browser thing
 }
 
 const settings: Config = JSON.parse(
@@ -19,4 +20,5 @@ export const {
   export_folder,
   config_folder,
   engine_interval,
+  auto_refresh,
 } = settings;

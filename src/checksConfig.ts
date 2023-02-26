@@ -19,6 +19,14 @@ function parseChecksConfig(): ChecksConfig {
     ),
   );
 }
+// Run before engine!
+export function getMaxPoints(checks: Check[]): number {
+  let points = 0;
+  for (const check of checks) {
+    points += check.points;
+  }
+  return points;
+}
 
 export function getChecks(): Check[] {
   const checks: Check[] = [];

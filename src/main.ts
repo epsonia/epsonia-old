@@ -1,7 +1,8 @@
 import { marky } from "./deps.ts";
 import * as conf from "./config.ts";
-import { getChecks } from "./checksConfig.ts";
+import { getChecks, getMaxPoints } from "./checksConfig.ts";
 import { Engine } from "./engine.ts";
+import { Check } from "./checks/check.ts";
 
 main();
 
@@ -19,7 +20,8 @@ function main(): void {
     briefHtml,
   );
 
-  const engine: Engine = new Engine(getChecks());
+  const checks: Check[] = getChecks();
+  const engine: Engine = new Engine(checks, getMaxPoints(checks));
   setInterval(() => {
     loop(engine);
   }, conf.engine_interval);
