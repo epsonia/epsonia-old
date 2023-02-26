@@ -14,21 +14,21 @@ export function exists(filename: string): boolean {
   }
 }
 
-async function getLineFromFile(
+export function getLineFromFile(
   filePath: string,
   lineNumber: number,
-): Promise<string | undefined> {
-  let currentLine: string | undefined;
+): string {
+  let currentLine = "";
 
   try {
-    const file = await Deno.open(filePath);
+    const file = Deno.openSync(filePath);
 
     try {
       let currentLineNumber = 1;
 
-      for await (const line of Deno.iter(file)) {
+      for (const line of Deno.iterSync(file)) {
         if (currentLineNumber === lineNumber) {
-          currentLine = new TextDecoder().decode(line).trim();
+          currentLine = new TextDecoder("utf-8").decode(line).trim();
           break;
         }
         currentLineNumber++;

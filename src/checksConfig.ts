@@ -1,9 +1,19 @@
 import { FileExistsCheck } from "./checks/fileExists.ts";
 import { Check } from "./checks/check.ts";
 import * as conf from "./config.ts";
+import { FileLineContainsCheck } from "./checks/fileLine.ts";
 
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
+  fileLineContains: fLineContains[];
+}
+
+export interface fLineContains {
+  path: string;
+  correctContent: string;
+  line: number;
+  points: number;
+  message: string;
 }
 
 export interface fExistsCheck {
@@ -30,11 +40,25 @@ export function getMaxPoints(checks: Check[]): number {
 
 export function getChecks(): Check[] {
   const checks: Check[] = [];
+  const parsedConfig: ChecksConfig = parseChecksConfig();
 
   // Take in config and turn it into check objects, put objects in return array\
-  if (parseChecksConfig().fileExistsChecks) {
-    for (const check of parseChecksConfig().fileExistsChecks) {
+  if (parsedConfig.fileExistsChecks) {
+    for (const check of parsedConfig.fileExistsChecks) {
       checks.push(new FileExistsCheck(check.path, check.points));
+    }
+  }
+
+  if (parsedConfig.fileLineContains) {
+    for (const check of parsedConfig.fileLineContains) {
+      checks.push(
+        new FileLineContainsCheck(
+          check.path,
+          check.line,
+          check.correctContent,
+          check.points,
+        ),
+      );
     }
   }
 
