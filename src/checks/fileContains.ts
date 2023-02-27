@@ -1,4 +1,3 @@
-import { ChecksConfig } from "../checksConfig.ts";
 import { Check, CheckType } from "./check.ts";
 import { getFileContent } from "../utils.ts";
 
