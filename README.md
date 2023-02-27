@@ -52,6 +52,7 @@ Before creating the checks, you should first setup the config for Epsonia.
 
 - [x] Create HTML file for README
   - [x] Read from config file - Marky for parsing Markdown
+- [ ] Forensic questions
 - [x] Create HTML file for checks (scoring report)
 - [x] Config for creating the checks
 - [x] Create a modular check system
