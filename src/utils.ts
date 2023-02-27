@@ -31,3 +31,7 @@ export async function getLineFromFile(
 
   return currentLine;
 }
+
+export async function getFileContent(filePath: string) {
+  return await Deno.readTextFile(filePath);
+}

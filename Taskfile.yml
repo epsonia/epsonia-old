@@ -19,7 +19,7 @@ tasks:
     desc: Run {{.NAME}}
     cmds:
       - task: fmt
-      - deno run -A ./src/main.ts run {{ .CLI_ARGS }}
+      - deno run -A --unstable ./src/main.ts run {{ .CLI_ARGS }}
   fmt:
     desc: Format {{.NAME}}
     cmds:

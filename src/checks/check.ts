@@ -1,6 +1,7 @@
 export enum CheckType {
   FileExists,
   FileLineContains,
+  FileContainsContent,
 }
 
 export abstract class Check {

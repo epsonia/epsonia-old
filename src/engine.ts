@@ -1,7 +1,6 @@
 import { Check } from "./checks/check.ts";
-import { colors } from "./deps.ts";
+import { colors, marky, Notification } from "./deps.ts";
 import * as conf from "./config.ts";
-import { marky } from "./deps.ts";
 
 export class Engine {
   score = 0;
@@ -24,8 +23,17 @@ export class Engine {
     for (const check of this.checks) {
       await check.runCheck();
       if (check.completed) {
-        if (!this.completedChecks.includes(check)) this.score += check.points;
-        this.completedChecks.push(check);
+        if (!this.completedChecks.includes(check)) {
+          this.score += check.points;
+          this.completedChecks.push(check);
+
+          // Check complete notification & sound
+          new Notification({ macos: false, linux: true })
+            .title("Vulnerability fixed")
+            .body("Congrats! You fixed something")
+            .icon("config/notif_icon.png")
+            .show();
+        }
       }
     }
     this.checks = this.checks.filter((check) => !check.completed);

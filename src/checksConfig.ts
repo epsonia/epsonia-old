@@ -2,10 +2,19 @@ import { FileExistsCheck } from "./checks/fileExists.ts";
 import { Check } from "./checks/check.ts";
 import * as conf from "./config.ts";
 import { FileLineContainsCheck } from "./checks/fileLine.ts";
+import { FileContainsCheck } from "./checks/fileContains.ts";
 
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
   fileLineContains: fLineContains[];
+  fileContainsContent: fContainsContent[];
+}
+
+export interface fContainsContent {
+  path: string;
+  containing: string;
+  points: 5;
+  message: string;
 }
 
 export interface fLineContains {
@@ -56,6 +65,19 @@ export function getChecks(): Check[] {
           check.path,
           check.line,
           check.correctContent,
+          check.points,
+          check.message,
+        ),
+      );
+    }
+  }
+
+  if (parsedConfig.fileContainsContent) {
+    for (const check of parsedConfig.fileContainsContent) {
+      checks.push(
+        new FileContainsCheck(
+          check.path,
+          check.containing,
           check.points,
           check.message,
         ),
