@@ -3,11 +3,21 @@ import { Check } from "./checks/check.ts";
 import * as conf from "./config.ts";
 import { FileLineContainsCheck } from "./checks/fileLine.ts";
 import { FileContainsCheck } from "./checks/fileContains.ts";
+import { ForensicQuestionCheck } from "./checks/forensics.ts";
 
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
   fileLineContains: fLineContains[];
   fileContainsContent: fContainsContent[];
+  forensics: forensicQuestions[];
+}
+
+export interface forensicQuestions {
+  path: string;
+  answers: string[];
+  points: number;
+  message: string;
+  caseSensative: boolean;
 }
 
 export interface fContainsContent {
@@ -78,6 +88,20 @@ export function getChecks(): Check[] {
         new FileContainsCheck(
           check.path,
           check.containing,
+          check.points,
+          check.message,
+        ),
+      );
+    }
+  }
+
+  if (parsedConfig.forensics) {
+    for (const check of parsedConfig.forensics) {
+      checks.push(
+        new ForensicQuestionCheck(
+          check.path,
+          check.answers,
+          check.caseSensative,
           check.points,
           check.message,
         ),
