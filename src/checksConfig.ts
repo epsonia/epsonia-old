@@ -4,12 +4,20 @@ import * as conf from "./config.ts";
 import { FileLineContainsCheck } from "./checks/fileLine.ts";
 import { FileContainsCheck } from "./checks/fileContains.ts";
 import { ForensicQuestionCheck } from "./checks/forensics.ts";
+import { ServiceUpCheck } from "./checks/serviceUp.ts";
 
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
   fileLineContains: fLineContains[];
   fileContainsContent: fContainsContent[];
   forensics: forensicQuestions[];
+  onlineServices: onlineServices[];
+}
+
+export interface onlineServices {
+  serviceName: string;
+  points: number;
+  message: string;
 }
 
 export interface forensicQuestions {
@@ -102,6 +110,18 @@ export function getChecks(): Check[] {
           check.path,
           check.answers,
           check.caseSensative,
+          check.points,
+          check.message,
+        ),
+      );
+    }
+  }
+
+  if (parsedConfig.onlineServices) {
+    for (const check of parsedConfig.onlineServices) {
+      checks.push(
+        new ServiceUpCheck(
+          check.serviceName,
           check.points,
           check.message,
         ),
