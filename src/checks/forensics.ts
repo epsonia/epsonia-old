@@ -22,21 +22,11 @@ export class ForensicQuestionCheck extends Check {
   }
 
   public async runCheck(): Promise<void> {
-    let fileContent = await getFileContent(this.filePath);
-    if (!this.caseSensative) {
-      fileContent = fileContent.toLowerCase();
-    }
+    const fileContent = (await getFileContent(this.filePath))
+      [this.caseSensative ? "toString" : "toLowerCase"]();
 
-    if (
-      (
-        this.answers.filter((answer) => fileContent.includes(answer)).length !=
-          0
-      )
-    ) {
-      this.completed = true;
-      return;
-    }
-
-    this.completed = false;
+    this.completed = this.answers.every((answer) =>
+      fileContent.includes(this.caseSensative ? answer : answer.toLowerCase())
+    );
   }
 }
