@@ -5,6 +5,7 @@ import { FileLineContainsCheck } from "./checks/fileLine.ts";
 import { FileContainsCheck } from "./checks/fileContains.ts";
 import { ForensicQuestionCheck } from "./checks/forensics.ts";
 import { ServiceUpCheck } from "./checks/serviceUp.ts";
+import { BinaryExistsCheck } from "./checks/binaryExists.ts";
 
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
@@ -12,6 +13,13 @@ export interface ChecksConfig {
   fileContainsContent: fContainsContent[];
   forensics: forensicQuestions[];
   onlineServices: onlineServices[];
+  binaryExists: binExists[];
+}
+export interface binExists {
+  name: string;
+  points: number;
+  message: string;
+  penaltyMessage: string;
 }
 
 export interface onlineServices {
@@ -145,5 +153,17 @@ export function getChecks(): Check[] {
     }
   }
 
+  if (parsedConfig.binaryExists) {
+    for (const check of parsedConfig.binaryExists) {
+      checks.push(
+        new BinaryExistsCheck(
+          check.name,
+          check.points,
+          check.message,
+          check.penaltyMessage,
+        ),
+      );
+    }
+  }
   return checks;
 }

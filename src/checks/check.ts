@@ -4,6 +4,7 @@ export enum CheckType {
   FileContainsContent,
   ForensicQuestion,
   ServiceUpCheck,
+  BinaryEixstsCheck,
 }
 
 export abstract class Check {
