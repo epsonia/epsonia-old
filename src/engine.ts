@@ -7,12 +7,15 @@ export class Engine {
   maxScore: number;
   checks: Check[];
   completedChecks: Check[] = [];
+  allChecks: Check[] = [];
+  penalties: Check[] = [];
   checksAmount: number;
   imageName: string = conf.name;
 
   public constructor(checks: Check[], maxScore: number) {
     this.checksAmount = checks.length;
     this.checks = checks;
+    this.allChecks = checks;
     this.maxScore = maxScore;
   }
 
@@ -20,31 +23,55 @@ export class Engine {
   public async runEngine() {
     console.log(colors.bold.cyan("Running checks..."));
 
-    for (const check of this.checks) {
+    for (const check of this.allChecks) {
       await check.runCheck();
-      if (check.completed) {
-        if (!this.completedChecks.includes(check)) {
-          this.score += check.points;
-          this.completedChecks.push(check);
 
-          // Check complete notification & sound
-          new Notification({ macos: false, linux: true })
-            .title("Vulnerability fixed")
-            .body("Congrats! You fixed something")
-            .icon("config/notif_icon.png")
-            .show();
+      // Is a penalty
+      if (this.completedChecks.includes(check) && !check.completed) {
+        this.completedChecks.splice(this.completedChecks.indexOf(check), 1);
+        this.penalties.push(check);
+        this.score -= check.points;
+
+        continue;
+      }
+
+      if (
+        (check.completed && !this.completedChecks.includes(check)) ||
+        (check.completed && this.penalties.includes(check))
+      ) {
+        this.score += check.points;
+        this.completedChecks.push(check);
+
+        if (this.penalties.includes(check)) {
+          this.penalties.splice(this.penalties.indexOf(check), 1);
         }
+
+        new Notification({ macos: false, linux: true })
+          .title("Fixed vulnerability")
+          .body(`Congrats you got ${this.score} points`)
+          .icon("config/notif_icon.png")
+          .show();
       }
     }
-    this.checks = this.checks.filter((check) => !check.completed);
 
     this.setScoringReport();
 
     this.completedChecks.forEach((check) =>
       console.log(colors.italic.green(check.completedMessage))
     );
+
+    this.penalties.forEach((check) => {
+      console.log(
+        colors.bold.red(
+          `Penalty - ${check.completedMessage} - -${check.points}`,
+        ),
+      );
+    });
+
     console.log(
-      colors.bold.cyan("Finished running checks! Total points: " + this.score),
+      colors.bold.cyan(
+        "Finished running checks! Total points: " + this.score,
+      ),
     );
   }
 
