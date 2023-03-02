@@ -8,6 +8,8 @@ export interface Config {
   engine_interval: number; // Repetition for engine scoring (dely for each run)
   auto_refresh: number; // Auto refresh time for the scoring report browser thing
   notif_icon_path: string; // Path to notification icon image, should start with file://
+  competition_mode: string; // Competition mode, sounds what it sounds like, will enable teams n' stuff
+  competition_url: string; // Competition url, pretty much the backend
 }
 
 const settings: Config = JSON.parse(
@@ -23,4 +25,6 @@ export const {
   engine_interval,
   auto_refresh,
   notif_icon_path,
+  competition_mode,
+  competition_url,
 } = settings;

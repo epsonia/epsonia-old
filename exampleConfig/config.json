@@ -5,6 +5,9 @@
   "auto_export": true,
   "export_folder": "/home/matees/Desktop/epsonia/export",
   "config_folder": "/home/matees/Desktop/epsonia/config",
-  "engine_interval": 1000,
-  "auto_refresh": 2000
+  "notif_icon_path": "file:///home/matees/Desktop/epsonia/config/notif_icon.png",
+  "engine_interval": 5000,
+  "auto_refresh": 2500,
+  "competition_mode": true,
+  "competition_url": "http://localhost:8773/competition/1"
 }

@@ -1,0 +1,72 @@
+{
+  "onlineServices": [
+    {
+      "serviceName": "ufw",
+      "points": 3,
+      "message": "The wall of mordor is enabled (UFW)",
+      "penaltyMessage": "The wall of mordor is disabled! (UFW)"
+    }
+  ],
+  "forensics": [
+    {
+      "path": "/home/matees/Desktop/ForensicQuestion1.txt",
+      "answers": [
+        "Frodo"
+      ],
+      "caseSensative": true,
+      "points": 10,
+      "message": "Forensic question 1 solved (lord of the rings)",
+      "penaltyMessage": "The ring bearer is gone! (Forensic question 1 unsolved)"
+    },
+    {
+      "path": "/home/matees/Desktop/ForensicQuestion2.txt",
+      "answers": [
+        "Wushi Finger",
+        "Skidush"
+      ],
+      "caseSensative": false,
+      "points": 8,
+      "message": "Forensic question 2 solved (panda)",
+      "penaltyMessage": "Po can't move it move it. (Forensic 2)"
+    }
+  ],
+  "fileExistsChecks": [
+    {
+      "path": "/home/matees/Desktop/breakLinux.bat",
+      "points": 3,
+      "message": "Removed bad file",
+      "penaltyMessage": "Bad file is back!"
+    },
+    {
+      "path": "/home/matees/Desktop/rural.mp4",
+      "points": 1,
+      "message": "Removed rural.mp4 media file",
+      "penaltyMessage": "Media file is back rural.mp4 is back"
+    },
+    {
+      "path": "/home/matees/Desktop/hi.mp3",
+      "points": 1,
+      "message": "Removed hi.mp3 media file",
+      "penaltyMessage": "Media file hi.mp3 is back"
+    }
+  ],
+  "fileLineContains": [
+    {
+      "path": "/home/matees/Desktop/someConfig.conf",
+      "correctContent": "enableRoaming: true",
+      "line": "5",
+      "points": 4,
+      "message": "Enabled roaming",
+      "penaltyMessage": "Roaming is disabled!"
+    }
+  ],
+  "fileContainsContent": [
+    {
+      "path": "/home/matees/Desktop/secret.txt",
+      "containing": "Gondor",
+      "points": 5,
+      "message": "Song.txt contains \"Gondor\"",
+      "penaltyMessage": "Secret is unsolved"
+    }
+  ]
+}
