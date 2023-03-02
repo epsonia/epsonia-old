@@ -32,6 +32,12 @@ export class Engine {
         this.penalties.push(check);
         this.score -= check.points;
 
+        new Notification({ macos: false, linux: true })
+          .title("Penalty!")
+          .body(`You lost ${check.points} points!`)
+          .icon(conf.notif_icon_path)
+          .show();
+
         continue;
       }
 
@@ -48,8 +54,8 @@ export class Engine {
 
         new Notification({ macos: false, linux: true })
           .title("Fixed vulnerability")
-          .body(`Congrats you got ${this.score} points`)
-          .icon("config/notif_icon.png")
+          .body(`Congrats you got ${check.points} points`)
+          .icon(conf.notif_icon_path)
           .show();
       }
     }
@@ -83,10 +89,18 @@ export class Engine {
         `•${completedCheck.completedMessage} - ${completedCheck.points}\n\n`;
     }
 
+    let penaltiesChecksStr = "";
+    for (const penalty of this.penalties) {
+      console.log(penalty.penaltyMessage);
+      penaltiesChecksStr +=
+        `<p style="color: red;">•${penalty.penaltyMessage} - -${penalty.points}</p>\n\n`;
+    }
+
     const mdScoringReport =
       `# ${this.imageName}\n\n\n### Gained a total of ${this.score} out of ${this.maxScore} points` +
       `${" "}recieved\n\n### ${this.completedChecks.length} out of ${this.checksAmount} vulnerabilities ` +
-      `solved for a total of ${this.score} points:\n\n${completedChecksStr}`;
+      `solved for a total of ${this.score} points:\n\n${completedChecksStr}\n\n### Penalties (if any):\n${penaltiesChecksStr} ` +
+      ` `;
 
     const autoRefreshScript = `
     <script>

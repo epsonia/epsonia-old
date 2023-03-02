@@ -10,8 +10,9 @@ export class FileContainsCheck extends Check {
     containing: string,
     points: number,
     message: string,
+    penaltyMessage: string,
   ) {
-    super(CheckType.FileContainsContent, message, points);
+    super(CheckType.FileContainsContent, message, points, penaltyMessage);
 
     this.filePath = filePath;
     this.containing = containing;

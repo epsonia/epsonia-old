@@ -12,8 +12,9 @@ export class ForensicQuestionCheck extends Check {
     caseSensative: boolean,
     points: number,
     message: string,
+    penaltyMessage: string,
   ) {
-    super(CheckType.ForensicQuestion, message, points);
+    super(CheckType.ForensicQuestion, message, points, penaltyMessage);
 
     this.filePath = filePath;
     this.answers = answers;

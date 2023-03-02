@@ -7,6 +7,7 @@ export interface Config {
   export_folder: string; // Path to export, ../export/
   engine_interval: number; // Repetition for engine scoring (dely for each run)
   auto_refresh: number; // Auto refresh time for the scoring report browser thing
+  notif_icon_path: string; // Path to notification icon image, should start with file://
 }
 
 const settings: Config = JSON.parse(
@@ -21,4 +22,5 @@ export const {
   config_folder,
   engine_interval,
   auto_refresh,
+  notif_icon_path,
 } = settings;

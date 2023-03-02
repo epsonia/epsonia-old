@@ -7,8 +7,9 @@ export class ServiceUpCheck extends Check {
     serviceName: string,
     points: number,
     message: string,
+    penaltyMessage: string,
   ) {
-    super(CheckType.ServiceUpCheck, message, points);
+    super(CheckType.ServiceUpCheck, message, points, penaltyMessage);
 
     this.serviceName = serviceName;
     this.points = points;

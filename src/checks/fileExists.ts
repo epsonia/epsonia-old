@@ -3,11 +3,17 @@ import { exists } from "../utils.ts";
 
 export class FileExistsCheck extends Check {
   filePath: string;
-  constructor(filePath: string, points: number, message: string) {
+  constructor(
+    filePath: string,
+    points: number,
+    message: string,
+    penaltyMessage: string,
+  ) {
     super(
       CheckType.FileExists,
       message,
       points,
+      penaltyMessage,
     );
 
     this.filePath = filePath;

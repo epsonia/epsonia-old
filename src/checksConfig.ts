@@ -18,6 +18,7 @@ export interface onlineServices {
   serviceName: string;
   points: number;
   message: string;
+  penaltyMessage: string;
 }
 
 export interface forensicQuestions {
@@ -26,6 +27,7 @@ export interface forensicQuestions {
   points: number;
   message: string;
   caseSensative: boolean;
+  penaltyMessage: string;
 }
 
 export interface fContainsContent {
@@ -33,6 +35,7 @@ export interface fContainsContent {
   containing: string;
   points: 5;
   message: string;
+  penaltyMessage: string;
 }
 
 export interface fLineContains {
@@ -41,12 +44,14 @@ export interface fLineContains {
   line: number;
   points: number;
   message: string;
+  penaltyMessage: string;
 }
 
 export interface fExistsCheck {
   path: string; // Path of the file
   points: number; // Amount of points the check rewards
   message: string; // Message of the check after completion
+  penaltyMessage: string;
 }
 
 function parseChecksConfig(): ChecksConfig {
@@ -72,7 +77,14 @@ export function getChecks(): Check[] {
   // Take in config and turn it into check objects, put objects in return array\
   if (parsedConfig.fileExistsChecks) {
     for (const check of parsedConfig.fileExistsChecks) {
-      checks.push(new FileExistsCheck(check.path, check.points, check.message));
+      checks.push(
+        new FileExistsCheck(
+          check.path,
+          check.points,
+          check.message,
+          check.penaltyMessage,
+        ),
+      );
     }
   }
 
@@ -85,6 +97,7 @@ export function getChecks(): Check[] {
           check.correctContent,
           check.points,
           check.message,
+          check.penaltyMessage,
         ),
       );
     }
@@ -98,6 +111,7 @@ export function getChecks(): Check[] {
           check.containing,
           check.points,
           check.message,
+          check.penaltyMessage,
         ),
       );
     }
@@ -112,6 +126,7 @@ export function getChecks(): Check[] {
           check.caseSensative,
           check.points,
           check.message,
+          check.penaltyMessage,
         ),
       );
     }
@@ -124,6 +139,7 @@ export function getChecks(): Check[] {
           check.serviceName,
           check.points,
           check.message,
+          check.penaltyMessage,
         ),
       );
     }

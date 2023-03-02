@@ -12,11 +12,13 @@ export class FileLineContainsCheck extends Check {
     correctContent: string,
     points: number,
     message: string,
+    penaltyMessage: string,
   ) {
     super(
       CheckType.FileLineContains,
       message,
       points,
+      penaltyMessage,
     );
 
     this.filePath = filePath;
