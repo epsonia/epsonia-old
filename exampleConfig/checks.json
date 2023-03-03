@@ -1,4 +1,59 @@
 {
+  "users": [
+    {
+      "name": "matees",
+      "mainUser": true
+    },
+    {
+      "name": "albert",
+      "shouldExist": false,
+      "initialExist": true,
+      "administrator": true,
+      "points": 6,
+      "message": "Malicous user Albert removed",
+      "penaltyMessage": "Malicous user Albert has returned"
+    },
+    {
+      "name": "frodo",
+      "shouldExist": false,
+      "initialExist": true,
+      "administrator": false,
+      "points": 6,
+      "message": "Malicous user Frodo removed",
+      "penaltyMessage": "Malicous user Frodo has returned"
+    },
+    {
+      "name": "gandalf",
+      "shouldExist": true,
+      "initialExist": true,
+      "administrator": false,
+      "points": 8,
+      "penaltyMessage": "User Gandalf removed"
+    },
+    {
+      "name": "bilbo",
+      "shouldExist": true,
+      "initialExist": false,
+      "administrator": true,
+      "points": 8,
+      "message": "User Bilbo created",
+      "penaltyMessage": "User `Bilbo` was taken back to the grave"
+    }
+  ],
+  "binaryExists": [
+    {
+      "name": "firefox",
+      "points": 4,
+      "message": "Firefox is installed",
+      "penaltyMessage": "Firefox does not exist"
+    },
+    {
+      "name": "sl",
+      "points": 6,
+      "message": "Train sl is installed",
+      "penaltyMessage": "Train has left the village!"
+    }
+  ],
   "onlineServices": [
     {
       "serviceName": "ufw",

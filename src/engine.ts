@@ -1,4 +1,4 @@
-import { Check } from "./checks/check.ts";
+import { Check, CheckType } from "./checks/check.ts";
 import { colors, marky, Notification } from "./deps.ts";
 import * as conf from "./config.ts";
 
@@ -9,11 +9,16 @@ export class Engine {
   completedChecks: Check[] = [];
   allChecks: Check[] = [];
   penalties: Check[] = [];
+  hiddenPenalties: Check[] = [];
+  hiddenCompletions: Check[] = [];
   checksAmount: number;
   imageName: string = conf.name;
 
   public constructor(checks: Check[], maxScore: number) {
-    this.checksAmount = checks.length;
+    this.checksAmount =
+      (checks.filter((check) =>
+        check.checkType !== CheckType.UserHasToExistCheck
+      )).length;
     this.checks = checks;
     this.allChecks = checks;
     this.maxScore = maxScore;
@@ -26,8 +31,45 @@ export class Engine {
     for (const check of this.allChecks) {
       await check.runCheck();
 
+      if (check.checkType === CheckType.UserHasToExistCheck) {
+        if (this.hiddenCompletions.includes(check) && !check.completed) {
+          this.hiddenCompletions.splice(
+            this.hiddenCompletions.indexOf(check),
+            1,
+          );
+          this.hiddenPenalties.push(check);
+          this.score -= check.points;
+          new Notification({ macos: false, linux: true })
+            .title("Penalty!")
+            .body(`You lost ${check.points} points!`)
+            .icon(conf.notif_icon_path)
+            .show();
+        }
+
+        if (
+          (check.completed && !this.hiddenCompletions.includes(check)) ||
+          (check.completed && this.hiddenPenalties.includes(check))
+        ) {
+          this.score += check.points;
+          this.hiddenCompletions.push(check);
+
+          if (this.hiddenPenalties.includes(check)) {
+            this.hiddenPenalties.splice(this.hiddenPenalties.indexOf(check), 1);
+          }
+          new Notification({ macos: false, linux: true })
+            .title("Fixed vulnerability")
+            .body(`Congrats you got ${check.points} points`)
+            .icon(conf.notif_icon_path)
+            .show();
+        }
+
+        continue;
+      }
+
       // Is a penalty
-      if (this.completedChecks.includes(check) && !check.completed) {
+      if (
+        this.completedChecks.includes(check) && !check.completed
+      ) {
         this.completedChecks.splice(this.completedChecks.indexOf(check), 1);
         this.penalties.push(check);
         this.score -= check.points;
@@ -69,9 +111,15 @@ export class Engine {
     this.penalties.forEach((check) => {
       console.log(
         colors.bold.red(
-          `Penalty - ${check.completedMessage} - -${check.points}`,
+          `Penalty - ${check.penaltyMessage} - -${check.points}`,
         ),
       );
+    });
+
+    this.hiddenPenalties.forEach((check) => {
+      console.log(colors.bold.red(
+        `Penalty - ${check.penaltyMessage}- -${check.points}`,
+      ));
     });
 
     console.log(
@@ -91,7 +139,11 @@ export class Engine {
 
     let penaltiesChecksStr = "";
     for (const penalty of this.penalties) {
-      console.log(penalty.penaltyMessage);
+      penaltiesChecksStr +=
+        `<p style="color: red;">•${penalty.penaltyMessage} - -${penalty.points}</p>\n\n`;
+    }
+
+    for (const penalty of this.hiddenPenalties) {
       penaltiesChecksStr +=
         `<p style="color: red;">•${penalty.penaltyMessage} - -${penalty.points}</p>\n\n`;
     }

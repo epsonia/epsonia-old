@@ -35,3 +35,35 @@ export async function getLineFromFile(
 export async function getFileContent(filePath: string) {
   return await Deno.readTextFile(filePath);
 }
+
+// Thanks Chatgpt!
+export interface User {
+  name: string;
+  uid: number;
+  gid: number;
+  comment: string;
+  home: string;
+  shell: string;
+}
+
+// Thanks Chatgpt!
+export function getRealUsers(): User[] {
+  const users: User[] = [];
+  const passwdFile = Deno.readTextFileSync("/etc/passwd");
+
+  passwdFile.split("\n").forEach((line) => {
+    const [name, , uid, gid, comment, home, shell] = line.split(":");
+    if (Number(uid) >= 1000 && Number(uid) < 60000) {
+      users.push({
+        name,
+        uid: Number(uid),
+        gid: Number(gid),
+        comment,
+        home,
+        shell,
+      });
+    }
+  });
+
+  return users;
+}

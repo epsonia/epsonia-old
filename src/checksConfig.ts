@@ -6,6 +6,9 @@ import { FileContainsCheck } from "./checks/fileContains.ts";
 import { ForensicQuestionCheck } from "./checks/forensics.ts";
 import { ServiceUpCheck } from "./checks/serviceUp.ts";
 import { BinaryExistsCheck } from "./checks/binaryExists.ts";
+import { UsersCheck } from "./checks/userExists.ts";
+import { getRealUsers } from "./utils.ts";
+import { UserHasToExistCheck } from "./checks/userHasToExistCheck.ts";
 
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
@@ -14,7 +17,26 @@ export interface ChecksConfig {
   forensics: forensicQuestions[];
   onlineServices: onlineServices[];
   binaryExists: binExists[];
+  users: UserConf[];
 }
+
+/*
+  For user conf, if the user "shouldExist", you do not have to
+  set a messsage setting, because there wont be points given
+  if they exist. Though, if they shouldn't exist, set a message,
+  and a penalty message, for in case they return.
+*/
+export interface UserConf {
+  name: string;
+  shouldExist: boolean;
+  initialExist: boolean;
+  administrator: boolean;
+  points: number;
+  message: string;
+  penaltyMessage: string;
+  mainUser: boolean;
+}
+
 export interface binExists {
   name: string;
   points: number;
@@ -165,5 +187,28 @@ export function getChecks(): Check[] {
       );
     }
   }
+
+  if (parsedConfig.users) {
+    for (const check of parsedConfig.users) {
+      if (
+        check.shouldExist && check.initialExist &&
+        getRealUsers().some((u) => u.name === check.name) && !check.mainUser
+      ) {
+        checks.push(
+          new UserHasToExistCheck(
+            check,
+          ),
+        );
+        continue;
+      }
+
+      checks.push(
+        new UsersCheck(
+          check,
+        ),
+      );
+    }
+  }
+
   return checks;
 }

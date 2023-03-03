@@ -5,6 +5,8 @@ export enum CheckType {
   ForensicQuestion,
   ServiceUpCheck,
   BinaryEixstsCheck,
+  UserCheck,
+  UserHasToExistCheck,
 }
 
 export abstract class Check {
