@@ -9,6 +9,7 @@ import { BinaryExistsCheck } from "./checks/binaryExists.ts";
 import { UsersCheck } from "./checks/userExists.ts";
 import { getRealUsers } from "./utils.ts";
 import { UserHasToExistCheck } from "./checks/userHasToExistCheck.ts";
+import { UserAdminCheck } from "./checks/userAdminCheck.ts";
 
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
@@ -32,6 +33,7 @@ export interface UserConf {
   initialExist: boolean;
   administrator: boolean;
   points: number;
+  adminPoints: number;
   message: string;
   penaltyMessage: string;
   mainUser: boolean;
@@ -194,12 +196,20 @@ export function getChecks(): Check[] {
         check.shouldExist && check.initialExist &&
         getRealUsers().some((u) => u.name === check.name) && !check.mainUser
       ) {
+        if (check.administrator) {
+          checks.push(new UserAdminCheck(check));
+        }
+
         checks.push(
           new UserHasToExistCheck(
             check,
           ),
         );
         continue;
+      }
+
+      if (check.administrator) {
+        checks.push(new UserAdminCheck(check));
       }
 
       checks.push(

@@ -1,14 +1,12 @@
 {
   "users": [
     {
-      "name": "matees",
-      "mainUser": true
-    },
-    {
       "name": "albert",
       "shouldExist": false,
       "initialExist": true,
+      "administrator": true,
       "points": 6,
+      "adminPoints": 2,
       "message": "Malicous user Albert removed",
       "penaltyMessage": "Malicous user Albert has returned"
     },
@@ -16,7 +14,9 @@
       "name": "frodo",
       "shouldExist": false,
       "initialExist": true,
+      "administrator": true,
       "points": 6,
+      "adminPoints": 2,
       "message": "Malicous user Frodo removed",
       "penaltyMessage": "Malicous user Frodo has returned"
     },
@@ -24,14 +24,18 @@
       "name": "gandalf",
       "shouldExist": true,
       "initialExist": true,
+      "administrator": true,
       "points": 8,
+      "adminPoints": 2,
       "penaltyMessage": "User Gandalf removed"
     },
     {
       "name": "bilbo",
       "shouldExist": true,
       "initialExist": false,
+      "administrator": true,
       "points": 8,
+      "adminPoints": 2,
       "message": "User Bilbo created",
       "penaltyMessage": "User `Bilbo` was taken back to the grave"
     }

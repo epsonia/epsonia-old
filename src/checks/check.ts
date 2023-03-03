@@ -7,6 +7,7 @@ export enum CheckType {
   BinaryEixstsCheck,
   UserCheck,
   UserHasToExistCheck,
+  UserAdminCheck,
 }
 
 export abstract class Check {

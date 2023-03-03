@@ -19,6 +19,7 @@ export class Engine {
       (checks.filter((check) =>
         check.checkType !== CheckType.UserHasToExistCheck
       )).length;
+
     this.checks = checks;
     this.allChecks = checks;
     this.maxScore = maxScore;

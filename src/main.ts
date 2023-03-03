@@ -3,7 +3,6 @@ import * as conf from "./config.ts";
 import { getChecks, getMaxPoints } from "./checksConfig.ts";
 import { Engine } from "./engine.ts";
 import { Check } from "./checks/check.ts";
-import { getRealUsers } from "./utils.ts";
 
 await main();
 
