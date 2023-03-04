@@ -3,7 +3,7 @@
 </p>
 
 - [What is Epsonia](#what-is-epsonia)
-  - [Configuration \& Checks (vulns)](#configuration--checks-vulns)
+- [Configuration \& Checks (vulns)](#configuration--checks-vulns)
     - [Configuration](#configuration)
       - [Guide for each config:](#guide-for-each-config)
       - [Checks confi guide:](#checks-confi-guide)
@@ -13,7 +13,7 @@
 
 Epsonia is a user-friendly and engaging cybersecurity scoring engine designed to provide students with a fun and interactive way to improve their cybersecurity skills. With a focus on replicating the Cyberpatriot competition experience, Epsonia offers a dynamic and challenging platform for school clubs and their members to learn and develop their cybersecurity knowledge and expertise.
 
-## Configuration & Checks (vulns)
+# Configuration & Checks (vulns)
 
 This guide will help you configure and create a practice image with Epsonia.
 
