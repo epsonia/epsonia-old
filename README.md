@@ -7,7 +7,7 @@
     - [Configuration](#configuration)
       - [Guide for each config:](#guide-for-each-config)
       - [Checks confi guide:](#checks-confi-guide)
-  - [Todo](#todo)
+- [Todo](#todo)
 
 # What is Epsonia
 
@@ -123,7 +123,7 @@ _Here is an explination for each check currently available:_
     Path is the path of the file, and containing is what the file should
     contain.
 
-## Todo
+# Todo
 
 - [x] Create HTML file for README
   - [x] Read from config file - Marky for parsing Markdown
