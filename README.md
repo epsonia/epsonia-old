@@ -4,7 +4,7 @@
 
 <h1 align="center"> Epsonia </h1>
 
-<h3 align="center">Epsiona is a Cyberpatriot practice image "creator".</h3>
+<h3 align="center">The easy to use open source cybersecurity competition scoring engine.</h3>
 
 ## Configuration & Checks (vulns)
 
