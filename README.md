@@ -1,12 +1,10 @@
-# Epsiona
+<p align="center">
+   <img alt="Epsonia" src="https://raw.githubusercontent.com/maytees/epsonia/10d9ef716c69eaf93fb349c390c84c0193782407/LongBanner.svg" />
+</p>
 
-Epsiona is a Cyberpatriot practice image "creator".
+<h1 align="center"> Epsonia </h1>
 
-The hope for Epsiona is for it to have a GUI interface for creating Cyberpatriot
-practice images, and a config file, which the GUI writes to, though of course
-you would be able to simply write to the config file.
-
-Anyways, lets not get too ahead of ourselves into the future.
+<h3 align="center">Epsiona is a Cyberpatriot practice image "creator".</h3>
 
 ## Configuration & Checks (vulns)
 
