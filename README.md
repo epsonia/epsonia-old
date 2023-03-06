@@ -4,9 +4,9 @@
 
 - [What is Epsonia](#what-is-epsonia)
 - [Configuration \& Checks (vulns)](#configuration--checks-vulns)
-  - [Configuration](#configuration)
-    - [Guide for each config:](#guide-for-each-config)
-    - [Checks confi guide:](#checks-confi-guide)
+    - [Configuration](#configuration)
+      - [Guide for each config:](#guide-for-each-config)
+      - [Checks confi guide:](#checks-confi-guide)
 - [Todo](#todo)
 
 # What is Epsonia
@@ -136,7 +136,7 @@ _Here is an explination for each check currently available:_
 - [x] Config for creating the checks
 - [x] Create a modular check system
   - [x] Check file exist
-  - [ ] Check firewall up
+  - [x] Check firewall up
   - [ ] Check directory permissions
   - [ ] Check file permissions
   - [ ] Check passwords - _**strongness**_

@@ -21,7 +21,6 @@ export interface ChecksConfig {
   onlineServices: onlineServices[];
   binaryExists: binExists[];
   users: UserConf[];
-  // firewallUp: FirewallUp;
   firewallConfig: FirewallConfig;
 }
 
