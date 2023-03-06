@@ -11,6 +11,7 @@ import { getRealUsers } from "./utils.ts";
 import { UserHasToExistCheck } from "./checks/userHasToExistCheck.ts";
 import { UserAdminCheck } from "./checks/userAdminCheck.ts";
 import { FirewallUpCheck } from "./checks/firewalUp.ts";
+import { FirewallLoglevelCheck } from "./checks/firewallLoglevel.ts";
 
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
@@ -20,7 +21,28 @@ export interface ChecksConfig {
   onlineServices: onlineServices[];
   binaryExists: binExists[];
   users: UserConf[];
-  firewallUp: FirewallUp;
+  // firewallUp: FirewallUp;
+  firewallConfig: FirewallConfig;
+}
+
+export interface FirewallConfig {
+  firewallStatus: FirewallUp;
+  firewallLogging: FirewallLogConfig;
+  ports: FirewallPortsConfig;
+}
+
+export interface FirewallPortsConfig {
+  allowedPorts: number[];
+  points: number;
+  message: string;
+  penaltyMessage: string;
+}
+
+export interface FirewallLogConfig {
+  level: string;
+  points: number;
+  message: string;
+  penaltyMessage: string;
 }
 
 export interface FirewallUp {
@@ -229,17 +251,43 @@ export function getChecks(): Check[] {
     }
   }
 
-  const fup: FirewallUp = parsedConfig.firewallUp;
-  if (fup) {
+  const firewallConfig = parsedConfig.firewallConfig;
+
+  const { firewallStatus, firewallLogging, ports } = firewallConfig;
+
+  if (firewallStatus) {
     checks.push(
       new FirewallUpCheck(
-        fup.shouldbe,
-        fup.points,
-        fup.message,
-        fup.penaltyMessage,
+        firewallStatus.shouldbe,
+        firewallStatus.points,
+        firewallStatus.message,
+        firewallStatus.penaltyMessage,
       ),
     );
   }
+
+  if (firewallLogging) {
+    checks.push(
+      new FirewallLoglevelCheck(
+        firewallLogging.level,
+        firewallLogging.points,
+        firewallLogging.message,
+        firewallLogging.penaltyMessage,
+      ),
+    );
+  }
+
+  // -- Later
+  // if (ports) {
+  //   checks.push(
+  //     new FirewallPortsCheck(
+  //       ports.allowedPorts,
+  //       ports.points,
+  //       ports.message,
+  //       ports.penaltyMessage,
+  //     ),
+  //   );
+  // }
 
   return checks;
 }
