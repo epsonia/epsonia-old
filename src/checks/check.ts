@@ -8,6 +8,7 @@ export enum CheckType {
   UserCheck,
   UserHasToExistCheck,
   UserAdminCheck,
+  FirewallUpCheck,
 }
 
 export abstract class Check {

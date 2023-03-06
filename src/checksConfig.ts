@@ -10,6 +10,7 @@ import { UsersCheck } from "./checks/userExists.ts";
 import { getRealUsers } from "./utils.ts";
 import { UserHasToExistCheck } from "./checks/userHasToExistCheck.ts";
 import { UserAdminCheck } from "./checks/userAdminCheck.ts";
+import { FirewallUpCheck } from "./checks/firewalUp.ts";
 
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
@@ -19,6 +20,14 @@ export interface ChecksConfig {
   onlineServices: onlineServices[];
   binaryExists: binExists[];
   users: UserConf[];
+  firewallUp: FirewallUp;
+}
+
+export interface FirewallUp {
+  shouldbe: boolean;
+  points: number;
+  message: string;
+  penaltyMessage: string;
 }
 
 /*
@@ -218,6 +227,18 @@ export function getChecks(): Check[] {
         ),
       );
     }
+  }
+
+  const fup: FirewallUp = parsedConfig.firewallUp;
+  if (fup) {
+    checks.push(
+      new FirewallUpCheck(
+        fup.shouldbe,
+        fup.points,
+        fup.message,
+        fup.penaltyMessage,
+      ),
+    );
   }
 
   return checks;
