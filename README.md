@@ -7,7 +7,6 @@
     - [Configuration](#configuration)
       - [Guide for each config:](#guide-for-each-config)
       - [Checks confi guide:](#checks-confi-guide)
-- [Todo](#todo)
 
 # What is Epsonia
 
@@ -126,20 +125,3 @@ _Here is an explination for each check currently available:_
     objects with a `path`, `containing`, points, message, and penalty message.
     Path is the path of the file, and containing is what the file should
     contain.
-
-# Todo
-
-- [x] Create HTML file for README
-  - [x] Read from config file - Marky for parsing Markdown
-- [x] Forensic questions
-- [x] Create HTML file for checks (scoring report)
-- [x] Config for creating the checks
-- [x] Create a modular check system
-  - [x] Check file exist
-  - [x] Check firewall up
-  - [ ] Check directory permissions
-  - [ ] Check file permissions
-  - [ ] Check passwords - _**strongness**_
-  - [ ] Check user permissions
-- [ ] Create working backend service
-- [ ] Create web interface for creating images
