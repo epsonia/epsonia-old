@@ -34,21 +34,33 @@ A user currently has 8 settings in Epsonia:
 - `message`
 - `penaltyMessage`
 
+#### Name
+
 Name is the \*_username_ (not name) of the user, meaning it most likely is not capitalized
 in any way.
 
+#### Should exist
+
 Should exist is pretty self explanitory, you simply state if the user should exist.
+
+#### Initial Exist
 
 Initial exist is if the user exists when the image is laucnhed by a competitor.
 
+#### Administrator
+
 Administrator is if the user should be an administrator.
 
-Points are how many points the user gets from removing/adding a use,
+#### Other
+
+Points are how many points the user gets from removing/adding a user,
 while admin points are how many points the competitor gains/loses if they grant/removed
 a user's sudo privledges.
 
 Message is the completion message shown in the scoring report for when the user finishes the
 **user** (not administrator) vulnerability.
+
+#### Twists
 
 Keep in mind that there are a few twists to the users object: If you have a user
 who should exist, and initially exists, it is not a check meaning that the check doesn't
@@ -63,7 +75,7 @@ And finally, the last twist is that the administrator checks do not go along wit
 the user checks, they are parsed seperatly, meaning they are differnet checks, this goes back
 to the start of the guide, where it says that some checks include checks in them.
 
-Example User config
+#### Example User config
 
 ```json
   "users": [
@@ -128,7 +140,11 @@ The firewall status object contains the following attributes:
 - `message`
 - `penaltyMessage`
 
-Should be up is a boolean value of if the firewall should be up or down.
+##### Shouldbeup
+
+Should-be-up is a boolean value of if the firewall should be up or down.
+
+##### Other
 
 Rest are self explanitory.
 
@@ -141,7 +157,11 @@ The firewall logging object contains the following attributes:
 - `message`
 - `penaltyMessage`
 
+##### Level
+
 Level can either be `off`, `low`, `medium`, `high`, or `full`.
+
+##### Other
 
 Rest are self explanitory
 
@@ -154,8 +174,12 @@ The ports object contains the following attributes:
 - `message`
 - `penaltyMessage`
 
+##### Open Ports
+
 The open ports attribute is a list of numbers, which are the ports that are supposed to be open
 on UFW.
+
+##### Other
 
 The rest are self explanitory.
 
@@ -199,7 +223,11 @@ The binary exists list contains objects which have the following attributes:
 - `message`
 - `penaltyMessage`
 
+#### Name
+
 The name attribute is the name of the program file.
+
+#### Other
 
 Last 3 are self explanitory.
 
@@ -234,7 +262,11 @@ The online services object contains the folloiwng attributes:
 - `message`
 - `penaltyMessage`
 
+#### Name
+
 Service is the name of the service.
+
+#### Other
 
 Rest are explanitory.
 
@@ -265,11 +297,19 @@ The forensics list has objects with the following attributes:
 - `message`
 - `penaltyMessage`
 
+#### Path
+
 Path is the path of the file which contains the forensic question (should be on the desktop).
+
+#### Answers
 
 Answers is a list of strings, which are the answers.
 
+#### Case sensative
+
 Case sensative is a boolean value which specifies if the answer should be case sensative.
+
+#### Other
 
 The rest are self explanitory.
 
@@ -312,7 +352,11 @@ The file exists check attributes consists of:
 - `message`
 - `penaltyMessage`
 
+#### Path
+
 Path is the path of the file.
+
+#### Other
 
 Rest are explanitory 😉.
 
@@ -348,11 +392,19 @@ This check contains the following attributes:
 - `message`
 - `penaltyMessage`
 
+#### Path
+
 Path is the path of the file which is being checked.
+
+#### Correct content
 
 Correct content is the correct content which the line should have
 
+#### Line number
+
 Line is the line number which you are trying to check
+
+#### Other
 
 Rest are explanitory.
 
@@ -383,9 +435,15 @@ This check contains the following attributes:
 - `message`
 - `penaltyMessage`
 
+#### Path
+
 Path is the path of the file.
 
+#### Containing
+
 Containing is a string of the correct content which you are checking for.
+
+#### Other
 
 Rest are explanitory.
 
