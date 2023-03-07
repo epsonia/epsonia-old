@@ -110,6 +110,83 @@ Example User config:
 
 ```
 
+### Firewall checks
+
+The firewall config object contains differnet checks,
+the checks consist of the following objects:
+
+- `firewallStatus`
+- `firewallLogging`
+- `ports`
+
+#### Firewall Status
+
+The firewall status object contains the following attributes:
+
+- `shouldbeUp`
+- `points`
+- `message`
+- `penaltyMessage`
+
+Should be up is a boolean value of if the firewall should be up or down.
+
+Rest are self explanitory.
+
+#### Firewall Logging
+
+The firewall logging object contains the following attributes:
+
+- `level`
+- `points`
+- `message`
+- `penaltyMessage`
+
+Level can either be `off`, `low`, `medium`, `high`, or `full`.
+
+Rest are self explanitory
+
+#### Ports check (not yet implemented)
+
+The ports object contains the following attributes:
+
+- `openPorts`
+- `points`
+- `message`
+- `penaltyMessage`
+
+The open ports attribute is a list of numbers, which are the ports that are supposed to be open
+on UFW.
+
+The rest are self explanitory.
+
+Example of Firewall config:
+
+```json
+  "firewallConfig": {
+    "firewallStatus": {
+      "shouldbeUp": true,
+      "points": 5,
+      "message": "Firewall is up",
+      "penaltyMessage": "Firewall is down"
+    },
+    "firewallLogging": {
+      "level": "full",
+      "points": 2,
+      "message": "Firewall logging set to full",
+      "penaltyMessage": "Firewall logging is not right"
+    },
+    "ports": {
+      "openPorts": [
+        80,
+        443
+      ],
+      "points": 2,
+      "message": "Port is open",
+      "penaltyMessage": "Port is closed"
+    }
+  }
+```
+
 ### Binary exists (program exists)
 
 This binary exists check will run the which command to check if the command
