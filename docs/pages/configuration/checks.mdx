@@ -1,0 +1,329 @@
+import { Callout } from "nextra-theme-docs";
+
+# Checks
+
+Welcome to the checks configuration guide. This guide will help you
+create the vulnerabilities for your Epsonia image.
+
+The `checks.json` contains an object of various lists, and objects, each of them being
+checks, except for some exceptions which have 2 or more in one config, to make terms easier.
+
+## Guide for each check
+
+<Callout type="info" emoji="ℹ️">
+  You should first setup the vulnerabilities in your image before creating the
+  configuration.
+</Callout>
+
+<Callout type="warning" emoji="⚠️">
+  Keep in mind that these checks are still in the works. There is more
+  functionality coming to most of these checks.
+</Callout>
+
+### Users check (config)
+
+Users is a list which contains object, each object being a user and their settings.
+A user currently has 8 settings in Epsonia:
+
+- `name`
+- `shouldExist`
+- `initialExist`
+- `administrator`
+- `points`
+- `adminPoints`
+- `message`
+- `penaltyMessage`
+
+Name is the \*_username_ (not name) of the user, meaning it most likely is not capitalized
+in any way.
+
+Should exist is pretty self explanitory, you simply state if the user should exist.
+
+Initial exist is if the user exists when the image is laucnhed by a competitor.
+
+Administrator is if the user should be an administrator.
+
+Points are how many points the user gets from removing/adding a use,
+while admin points are how many points the competitor gains/loses if they grant/removed
+a user's sudo privledges.
+
+Message is the completion message shown in the scoring report for when the user finishes the
+**user** (not administrator) vulnerability.
+
+Keep in mind that there are a few twists to the users object: If you have a user
+who should exist, and initially exists, it is not a check meaning that the check doesn't
+get added to the vulnerabilities list, but is penatalized if the user removes said
+user, because they are suppoed to exist, and they already exist, so the user removing
+them would be **bad**.
+
+Another twist is for if the user should exist, but doesn't initially exist - this
+check is for a user who needs to be added
+
+And finally, the last twist is that the administrator checks do not go along with
+the user checks, they are parsed seperatly, meaning they are differnet checks, this goes back
+to the start of the guide, where it says that some checks include checks in them.
+
+Example User config:
+
+```json
+  "users": [
+    {
+      "name": "albert",
+      "shouldExist": false,
+      "initialExist": true,
+      "administrator": false,
+      "points": 6,
+      "adminPoints": 2,
+      "message": "Malicous user Albert removed",
+      "penaltyMessage": "Malicous user Albert has returned"
+    },
+    {
+      "name": "frodo",
+      "shouldExist": false,
+      "initialExist": true,
+      "administrator": false,
+      "points": 6,
+      "adminPoints": 2,
+      "message": "Malicous user Frodo removed",
+      "penaltyMessage": "Malicous user Frodo has returned"
+    },
+    {
+      "name": "gandalf",
+      "shouldExist": true,
+      "initialExist": true,
+      "administrator": true,
+      "points": 8,
+      "adminPoints": 2,
+      "penaltyMessage": "User Gandalf removed"
+    },
+    {
+      "name": "bilbo",
+      "shouldExist": true,
+      "initialExist": false,
+      "administrator": true,
+      "points": 8,
+      "adminPoints": 2,
+      "message": "User Bilbo created",
+      "penaltyMessage": "User `Bilbo` was taken back to the grave"
+    }
+  ]
+
+```
+
+### Binary exists (program exists)
+
+This binary exists check will run the which command to check if the command
+returns a path to the binary.
+
+The binary exists list contains objects which have the following attributes:
+
+- `name`
+- `points`
+- `message`
+- `penaltyMessage`
+
+The name attribute is the name of the program file.
+
+Last 3 are self explanitory.
+
+Example binary check:
+
+```json
+  "binaryExists": [
+    {
+      "name": "firefox",
+      "points": 4,
+      "message": "Firefox is installed",
+      "penaltyMessage": "Firefox does not exist"
+    },
+    {
+      "name": "sl",
+      "points": 6,
+      "message": "Train sl is installed",
+      "penaltyMessage": "Train has left the village!"
+    }
+  ]
+```
+
+### Online Services
+
+This will run the `systemctl is-active` command in order to check if the service is
+running.
+
+The online services object contains the folloiwng attributes:
+
+- `serviceName`
+- `points`
+- `message`
+- `penaltyMessage`
+
+Service is the name of the service.
+
+Rest are explanitory.
+
+Online services example:
+
+```json
+  "onlineServices": [
+    {
+      "serviceName": "ufw",
+      "points": 3,
+      "message": "The wall of mordor is enabled (UFW)",
+      "penaltyMessage": "The wall of mordor is disabled! (UFW)"
+    }
+  ]
+```
+
+### Forensics
+
+There is a plan for forensics to be their own part of Epsonia, rather than being a part
+of the checks file. Though that is for later.
+
+The forensics list has objects with the following attributes:
+
+- `path`
+- `answers`
+- `caseSensative`
+- `points`
+- `message`
+- `penaltyMessage`
+
+Path is the path of the file which contains the forensic question (should be on the desktop).
+
+Answers is a list of strings, which are the answers.
+
+Case sensative is a boolean value which specifies if the answer should be case sensative.
+
+The rest are self explanitory.
+
+Forensics example:
+
+```json
+  "forensics": [
+    {
+      "path": "/home/matees/Desktop/ForensicQuestion1.txt",
+      "answers": [
+        "Frodo"
+      ],
+      "caseSensative": true,
+      "points": 10,
+      "message": "Forensic question 1 solved (lord of the rings)",
+      "penaltyMessage": "The ring bearer is gone! (Forensic question 1 unsolved)"
+    },
+    {
+      "path": "/home/matees/Desktop/ForensicQuestion2.txt",
+      "answers": [
+        "Wushi Finger",
+        "Skidush"
+      ],
+      "caseSensative": false,
+      "points": 8,
+      "message": "Forensic question 2 solved (panda)",
+      "penaltyMessage": "Po can't move it move it. (Forensic 2)"
+    }
+  ]
+```
+
+### File exists
+
+File exists checks if a file exists, if so, you get points.
+
+The file exists check attributes consists of:
+
+- `path`
+- `points`
+- `message`
+- `penaltyMessage`
+
+Path is the path of the file.
+
+Rest are explanitory 😉.
+
+Example for file exists:
+
+```json
+  "fileExistsChecks": [
+    {
+      "path": "/home/matees/Desktop/breakLinux.bat",
+      "points": 3,
+      "message": "Removed bad file",
+      "penaltyMessage": "Bad file is back!"
+    },
+    {
+      "path": "/home/matees/Desktop/hi.mp3",
+      "points": 1,
+      "message": "Removed hi.mp3 media file",
+      "penaltyMessage": "Media file hi.mp3 is back"
+    }
+  ]
+```
+
+### File line contains
+
+This checks if a certain line is equal to the correct content.
+
+This check contains the following attributes:
+
+- `path`
+- `correctContent`
+- `line`
+- `points`
+- `message`
+- `penaltyMessage`
+
+Path is the path of the file which is being checked.
+
+Correct content is the correct content which the line should have
+
+Line is the line number which you are trying to check
+
+Rest are explanitory.
+
+File line contains example:
+
+```json
+  "fileLineContains": [
+    {
+      "path": "/home/matees/Desktop/someConfig.conf",
+      "correctContent": "enableRoaming: true",
+      "line": "5",
+      "points": 4,
+      "message": "Enabled roaming",
+      "penaltyMessage": "Roaming is disabled!"
+    }
+  ]
+```
+
+### File contains content
+
+This check checks if a file contains a string.
+
+This check contains the following attributes:
+
+- `path`
+- `containing`
+- `points`
+- `message`
+- `penaltyMessage`
+
+Path is the path of the file.
+
+Containing is a string of the correct content which you are checking for.
+
+Rest are explanitory.
+
+Example of file contains content:
+
+```json
+  "fileContainsContent": [
+    {
+      "path": "/home/matees/Desktop/secret.txt",
+      "containing": "Gondor",
+      "points": 5,
+      "message": "Song.txt contains \"Gondor\"",
+      "penaltyMessage": "Secret is unsolved"
+    }
+  ]
+```
+
+That is it for the checks, keep in mind that more will be added with each update (most likely).

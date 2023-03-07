@@ -5,3 +5,6 @@ config/config.json
 config/checks.json
 
 export/brief.html
+
+docs/node_modules
+docs/.next
