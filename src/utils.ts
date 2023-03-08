@@ -98,3 +98,33 @@ export async function isPortOpen(port: number): Promise<boolean> {
     return false;
   }
 }
+
+export async function isUserInGroup(
+  user: string,
+  group: string,
+): Promise<boolean> {
+  const process = Deno.run({
+    cmd: ["id", user],
+    stdout: "piped",
+    stderr: "piped",
+  });
+
+  const { code } = await process.status();
+
+  if (code == 0) {
+    const rawOutput = await process.output();
+    const output = new TextDecoder().decode(rawOutput);
+
+    if (output.includes(group)) {
+      return true;
+    }
+
+    return false;
+  } else {
+    console.log("0");
+    const rawError = await process.stderrOutput();
+    const errorString = new TextDecoder().decode(rawError);
+    console.log(errorString);
+    return false;
+  }
+}
