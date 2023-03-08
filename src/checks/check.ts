@@ -10,6 +10,7 @@ export enum CheckType {
   UserAdminCheck,
   FirewallUpCheck,
   FirewallLoglevel,
+  FirewallPortsCheck,
 }
 
 export abstract class Check {

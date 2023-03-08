@@ -1,0 +1,50 @@
+import { Callout } from "nextra-theme-docs";
+
+# Basic configuration
+
+This guide will help you configure the `config.json` file
+in order to get Epsonia up & running.
+
+## Guide for each config:
+
+### Name & image url
+
+- `name`: Name of the image, used in brief, scoring, and etc.
+
+- `image_url`: Image for the brief, and scoring report (NF)
+
+### Auto Export
+
+<Callout type="info" emoji="️ℹ️">
+  The auto export path should be the Desktop
+</Callout>
+
+- `auto_export_path`: For forensics, brief, and scoring report.
+
+- `auto_export`: State if you want auto export or not.
+
+### Config folders
+
+<Callout type="warning" emoji="⚠️">
+  This is a weird thing in Epsonia, it will be removed later on.
+</Callout>
+
+- `config_folder`: Absolute path of the config folder. (the one you created)
+
+<Callout type="info" emoji="ℹ️">
+  You should set export_folder to "" if you have auto_export set to true.
+</Callout>
+
+- `export_folder`: Path to the export folder
+
+### Engine settings
+
+- `engine_interval`: Repetition for engine scoring (delay for each _"scoring"_
+  run)
+- `auto_refresh`: Auto refresh time for the scoring report HTML page
+
+### Competition settings
+
+- `competition_mode`: This boolean value turns on/off competition mode, which
+  connects to your competition server
+- `competition_url`: The URL endpoint for your competition.
