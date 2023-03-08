@@ -489,4 +489,27 @@ Shouldbe is a boolean value which specifies if the user should be in the group o
 
 Rest are explanitory.
 
+#### Example of user in group
+
+```json
+  "userInGroup": [
+    {
+      "name": "matees",
+      "group": "wonkydonkers",
+      "shouldbe": true,
+      "points": 2,
+      "message": "User matees in correct group",
+      "penaltyMessage": "User matees is not in the correct group"
+    },
+    {
+      "name": "bilbo",
+      "group": "wonkydonkers",
+      "shouldbe": false,
+      "points": 2,
+      "message": "User bilbo not in group",
+      "penaltyMessage": "User bilbo is in the wrong group"
+    }
+  ]
+```
+
 That is it for the checks, keep in mind that more will be added with each update (most likely).
