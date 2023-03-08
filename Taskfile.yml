@@ -2,8 +2,8 @@ version: "3"
 
 vars:
   NAME: epsonia
- 
-tasks: 
+
+tasks:
   build:
     desc: Compile {{.NAME}}
     cmds:
@@ -11,7 +11,7 @@ tasks:
       - deno compile -A --unstable -o ./build/lin/{{.NAME}} --target=x86_64-unknown-linux-gnu ./src/main.ts
       - deno compile -A --unstable -o ./build/win/{{.NAME}} --target=x86_64-pc-windows-msvc ./src/main.ts
   clean:
-    desc: Remove excess files 
+    desc: Remove excess files
     cmds:
       - task: fmt
       - rm -rf ./build
@@ -23,4 +23,4 @@ tasks:
   fmt:
     desc: Format {{.NAME}}
     cmds:
-      - deno fmt .
+      - deno fmt config/ src/ export/

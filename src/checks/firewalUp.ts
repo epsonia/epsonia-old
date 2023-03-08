@@ -25,7 +25,6 @@ export class FirewallUpCheck extends Check {
     );
     await check.runCheck();
 
-    console.log(check.completed);
     this.completed = check.completed;
   }
 }

@@ -1,10 +1,33 @@
 {
+  "firewallConfig": {
+    "firewallStatus": {
+      "shouldbeUp": true,
+      "points": 5,
+      "message": "Firewall is up",
+      "penaltyMessage": "Firewall is down"
+    },
+    "firewallLogging": {
+      "level": "full",
+      "points": 2,
+      "message": "Firewall logging set to full",
+      "penaltyMessage": "Firewall logging is not right"
+    },
+    "ports": {
+      "openPorts": [
+        80,
+        443
+      ],
+      "points": 2,
+      "message": "Port is open",
+      "penaltyMessage": "Port is closed"
+    }
+  },
   "users": [
     {
       "name": "albert",
       "shouldExist": false,
       "initialExist": true,
-      "administrator": true,
+      "administrator": false,
       "points": 6,
       "adminPoints": 2,
       "message": "Malicous user Albert removed",
@@ -14,7 +37,7 @@
       "name": "frodo",
       "shouldExist": false,
       "initialExist": true,
-      "administrator": true,
+      "administrator": false,
       "points": 6,
       "adminPoints": 2,
       "message": "Malicous user Frodo removed",

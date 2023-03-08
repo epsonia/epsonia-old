@@ -12,7 +12,7 @@ import { UserHasToExistCheck } from "./checks/userHasToExistCheck.ts";
 import { UserAdminCheck } from "./checks/userAdminCheck.ts";
 import { FirewallUpCheck } from "./checks/firewalUp.ts";
 import { FirewallLoglevelCheck } from "./checks/firewallLoglevel.ts";
-
+import { FirewallPortCheck } from "./checks/firewallPorts.ts";
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
   fileLineContains: fLineContains[];
@@ -31,7 +31,7 @@ export interface FirewallConfig {
 }
 
 export interface FirewallPortsConfig {
-  allowedPorts: number[];
+  openPorts: number[];
   points: number;
   message: string;
   penaltyMessage: string;
@@ -276,17 +276,18 @@ export function getChecks(): Check[] {
     );
   }
 
-  // -- Later
-  // if (ports) {
-  //   checks.push(
-  //     new FirewallPortsCheck(
-  //       ports.allowedPorts,
-  //       ports.points,
-  //       ports.message,
-  //       ports.penaltyMessage,
-  //     ),
-  //   );
-  // }
+  if (ports) {
+    for (const port of ports.openPorts) {
+      checks.push(
+        new FirewallPortCheck(
+          port,
+          ports.points,
+          ports.message,
+          ports.penaltyMessage,
+        ),
+      );
+    }
+  }
 
   return checks;
 }
