@@ -461,4 +461,55 @@ Rest are explanitory.
   ]
 ```
 
+### User in group
+
+This check checks if a user is in a group.
+
+Here are the attributes:
+
+- `name`
+- `group`
+- `points`
+- `message`
+- `penaltyMessage`
+
+#### Name
+
+Name is the name of the user.
+
+#### Group
+
+Group is the name of the group.
+
+#### Shouldbe
+
+Shouldbe is a boolean value which specifies if the user should be in the group or not.
+
+#### Other
+
+Rest are explanitory.
+
+#### Example of user in group
+
+```json
+  "userInGroup": [
+    {
+      "name": "matees",
+      "group": "wonkydonkers",
+      "shouldbe": true,
+      "points": 2,
+      "message": "User matees in correct group",
+      "penaltyMessage": "User matees is not in the correct group"
+    },
+    {
+      "name": "bilbo",
+      "group": "wonkydonkers",
+      "shouldbe": false,
+      "points": 2,
+      "message": "User bilbo not in group",
+      "penaltyMessage": "User bilbo is in the wrong group"
+    }
+  ]
+```
+
 That is it for the checks, keep in mind that more will be added with each update (most likely).
