@@ -67,3 +67,34 @@ export function getRealUsers(): User[] {
 
   return users;
 }
+
+export async function isPortOpen(port: number): Promise<boolean> {
+  const process = Deno.run({
+    cmd: ["sudo", "ufw", "status", "verbose"],
+    stdout: "piped",
+    stderr: "piped",
+  });
+
+  const { code } = await process.status();
+
+  if (code == 0) {
+    const rawOutput = await process.output();
+    const output = new TextDecoder().decode(rawOutput);
+    const lines = output.split("\n");
+
+    for (const line of lines) {
+      if (line.includes(port.toString())) {
+        if (line.includes("ALLOW")) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  } else {
+    const rawError = await process.stderrOutput();
+    const errorString = new TextDecoder().decode(rawError);
+    console.log(errorString);
+    return false;
+  }
+}
