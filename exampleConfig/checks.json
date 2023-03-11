@@ -1,4 +1,22 @@
 {
+  "userInGroup": [
+    {
+      "name": "matees",
+      "group": "wonkydonkers",
+      "shouldbe": true,
+      "points": 2,
+      "message": "User matees in correct group",
+      "penaltyMessage": "User matees is not in the correct group"
+    },
+    {
+      "name": "bilbo",
+      "group": "wonkydonkers",
+      "shouldbe": false,
+      "points": 2,
+      "message": "User bilbo not in group",
+      "penaltyMessage": "User bilbo is in the wrong group"
+    }
+  ],
   "firewallConfig": {
     "firewallStatus": {
       "shouldbeUp": true,

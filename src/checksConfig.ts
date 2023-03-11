@@ -13,6 +13,7 @@ import { UserAdminCheck } from "./checks/userAdminCheck.ts";
 import { FirewallUpCheck } from "./checks/firewalUp.ts";
 import { FirewallLoglevelCheck } from "./checks/firewallLoglevel.ts";
 import { FirewallPortCheck } from "./checks/firewallPorts.ts";
+import { UserInGroupCheck } from "./checks/userInGroup.ts";
 export interface ChecksConfig {
   fileExistsChecks: fExistsCheck[];
   fileLineContains: fLineContains[];
@@ -22,6 +23,16 @@ export interface ChecksConfig {
   binaryExists: binExists[];
   users: UserConf[];
   firewallConfig: FirewallConfig;
+  userInGroup: UserInGroup[];
+}
+
+export interface UserInGroup {
+  name: string;
+  group: string;
+  shouldbe: boolean;
+  points: number;
+  message: string;
+  penaltyMessage: string;
 }
 
 export interface FirewallConfig {
@@ -284,6 +295,23 @@ export function getChecks(): Check[] {
           ports.points,
           ports.message,
           ports.penaltyMessage,
+        ),
+      );
+    }
+  }
+
+  console.log(parsedConfig.userInGroup);
+  if (parsedConfig.userInGroup) {
+    console.log("iii");
+    for (const check of parsedConfig.userInGroup) {
+      checks.push(
+        new UserInGroupCheck(
+          check.name,
+          check.group,
+          check.shouldbe,
+          check.points,
+          check.message,
+          check.penaltyMessage,
         ),
       );
     }
