@@ -1,5 +1,5 @@
 <p align="center">
-   <img alt="Epsonia" src="https://raw.githubusercontent.com/maytees/epsonia/alpha-v0.2/LongBanner.svg" />
+   <img alt="Epsonia" src="https://raw.githubusercontent.com/maytees/epsonia/master/LongBanner.svg" />
 </p>
 
 - [What is Epsonia](#what-is-epsonia)
