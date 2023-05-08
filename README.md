@@ -2,6 +2,8 @@
    <img alt="Epsonia" src="https://raw.githubusercontent.com/maytees/epsonia/master/LongBanner.svg" />
 </p>
 
+***⚠️⚠️  Project replaced with [epsonia-rs](https://gtihub.com/epsonia/epsonia-rs)(rewrite)  ⚠️⚠️***
+
 - [What is Epsonia](#what-is-epsonia)
 
 # What is Epsonia
